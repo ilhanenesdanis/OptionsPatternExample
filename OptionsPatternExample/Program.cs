@@ -1,13 +1,15 @@
 using Microsoft.Extensions.Options;
 using OptionsPatternExample.Options;
+using OptionsPatternExample.Setup;
+using OptionsPatternExample.Setups;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
 
 
-builder.Services.Configure<ApplicationOptions>(builder.Configuration.GetSection(nameof(ApplicationOptions)));
-
+builder.Services.ConfigureOptions<ApplicationOptionsSetup>();
+builder.Services.ConfigureOptions<OutboxOptionsSetup>();
 
 var app = builder.Build();
 
